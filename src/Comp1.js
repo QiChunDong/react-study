@@ -45,6 +45,7 @@ class comp1 extends Component{
     render() {
         return (
             <div>
+                <h5>父子组件学习部分</h5>
                 <ul>
                     {
                         this.state.users.map((user, index) => (
