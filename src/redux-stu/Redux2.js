@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {SET_AGE} from '../action/actions'
 
 class Redux2 extends React.Component {
   addAge () {
@@ -21,15 +22,17 @@ export default connect(
   function (state,  props) {
     // 都留下的方法
     return {
-      ...state,
-      name: [state.name, props.name],
-      age: [state.age, props.age]
+      ...state.user,
+      name: [state.user.name, props.name],
+      age: [state.user.age, props.age]
     }
   }, {
     // 这个json写action函数 写多少都行
     setAge (ageadd) {
       return {
-        type: 'set_age',
+        // type: 'set_age',
+        // 使用全局同意管理的action命名 防止混乱
+        type: SET_AGE,
         ageadd
       }
     }

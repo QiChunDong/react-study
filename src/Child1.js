@@ -10,7 +10,7 @@ class Child1 extends React.Component{
 
     add () {
         this.setState({
-            value: this.state.value += 2
+            value: this.state.value + 6
         })
     }
 
