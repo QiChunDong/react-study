@@ -20,7 +20,7 @@ class comp extends React.Component{
         let oldId = old_props.match.params.id
         console.log(newId, oldId)
         // 然后进行对比 有差异再更新state
-        if (newId != oldId) {
+        if (newId !== oldId) {
             this.setState({
                 title: newId === '1' ? '大一新生' : '大四老油条'
             })
