@@ -1,10 +1,38 @@
 // 列表页
-import React, { Component } from 'react-dom';
+import React, { Component } from 'react';
+import {Link, withRouter} from 'react-router-dom'
 
-class Table extends Component {
+// 引入样式文件
+import '../assets/css/Panel.css'
+
+// 引入api 发送请求
+import api from '../api/index'
+import {ADD_ITEM} from '../action/index'
+import { connect } from 'react-redux';
+
+class Panel extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(...args) {
     super(...args);
+  }
+
+  async addItem () {
+    // 先拿到表单数据
+    let name = this.refs.name.value
+    let price = this.refs.price.value
+    let count = this.refs.count.value
+
+    // 发送请求
+    let {error, data} = await api.get(`add/${name}/${price}/${count}`)
+
+    if (!error) {
+      // 更新列表
+      this.props.addItem(data)
+      // 跳转到列表页
+      // replace和push的区别在于是否在history中记录
+      //this.props.history.replace('/')
+      this.props.history.push('/')
+    }
   }
 
   render() {
@@ -81,4 +109,15 @@ class Table extends Component {
   }
 }
 
-export default Table
+export default connect(function (state, props) {
+  return state
+}, {
+  addItem (item) {
+    return {
+      type: ADD_ITEM,
+      item
+    }
+  }
+  // withRouter高阶函数的作用是将本页面纳入路由纳管
+  // this会加上router相关的内容 如本例使用的 history
+})(withRouter(Panel))

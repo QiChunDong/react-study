@@ -2,12 +2,16 @@ import {ADD_ITEM, INIT_ITEM, DEL_ITEM} from '../action'
 
 // 增加和初始化就是直接给items赋值
 // 删除是在原来的基础上筛掉删掉的记录 这里的做法是过滤掉
-function reducer (state, action) {
+function reducer (state = {items: []}, action) {
     switch (action.type) {
         case ADD_ITEM:
             return {
                 ...state,
-                items: action.items
+                // items: state.items.push(action.item)
+                items: [
+                    ...state.items,
+                    action.item
+                ]
             }
         case DEL_ITEM:
             return {

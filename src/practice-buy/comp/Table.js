@@ -1,5 +1,10 @@
 // 列表页
-import React, { Component } from 'react-dom';
+import React, { Component } from 'react'
+import {connect} from 'react-redux'
+
+// action
+import api from '../api/index';
+import {INIT_ITEM} from '../action/index'
 
 class Table extends Component {
   // eslint-disable-next-line no-useless-constructor
@@ -7,78 +12,52 @@ class Table extends Component {
     super(...args);
   }
 
+  async componentDidMount () {
+    // 先查数据
+    let {data} = await api.get('list')
+    //更新列表
+    this.props.initTable(data)
+  }
+
+  fnDel (ID) {
+    this.props.delFn && this.props.delFn(ID)
+  }
+
   render() {
     return (
-      <div>
-        <div className="my-panel-shadow"></div>
-        <div className="panel panel-default my-panel">
-          <div className="panel-heading">
-            <div className="panel-title">
-              标题
-              <Link to="/" className="pull-right glyphicon glyphicon-remove">
-                取消
-              </Link>
-            </div>
-          </div>
-          <div className="panel-body">
-            <form
-              className="form form-horizontal"
-              action="index.html"
-              method="post"
-            >
-              <div className="form-group">
-                <label className="col-sm-2 control-label">名称</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    placeholder="请输入商品名称"
-                    ref="name"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-2 control-label">价格</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="price"
-                    placeholder="请输入商品价格"
-                    ref="price"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-2 control-label">库存</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="count"
-                    placeholder="请输入库存数量"
-                    ref="count"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-10 col-sm-offset-2">
-                  <button
-                    type="button"
-                    className="btn btn-primary form-control"
-                    onClick={this.addItem.bind(this)}
-                  >
-                    提交
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    );
+        <table className="table">
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>价格</th>
+              <th>库存</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.items.map(item=>(
+              <tr key={item.ID}>
+                <td>{item.NAME}</td>
+                <td>￥{item.PRICE}</td>
+                <td>{item.COUNT}</td>
+                <td>
+                  <a href="#" className="glyphicon glyphicon-trash" onClick={this.fnDel.bind(this, item.ID)}>删除</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+    )
   }
 }
 
-export default Table
+export default connect(function (state, props) {
+  return state.good
+}, {
+  initTable (items) {
+    return {
+      type: INIT_ITEM,
+      items
+    }
+  }
+})(Table)

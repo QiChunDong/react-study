@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// 需要提前引入bootstrap的css文件
+import './practice-buy/assets/css/bootstrap.css'
+
 //////////////////////////////下面的所有redux代码全部转移到store.js统一管理///////////////
 // // 引入redux
 // import {createStore} from 'redux'

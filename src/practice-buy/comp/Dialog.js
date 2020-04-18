@@ -1,84 +1,62 @@
 // 列表页
-import React, { Component } from 'react-dom';
+import React, { Component } from 'react'
+import '../assets/css/Dialog.css';
 
-class Table extends Component {
+class Dialog extends Component {
   // eslint-disable-next-line no-useless-constructor
   constructor(...args) {
     super(...args);
+    this.state = {
+      show: false
+    }
+    this.callBack = null
+  }
+
+  // 打开弹框
+  open (fn) {
+    this.callBack = fn
+    this.setState({
+      show: true
+    })
+  }
+
+   // 关闭弹框
+  close () {
+    this.setState({
+      show: false
+    })
+  }
+
+  // 按钮点击 0是取消 1是确认
+  fnClick (index) {
+    this.callBack && this.callBack(index)
+    this.close()
   }
 
   render() {
     return (
-      <div>
-        <div className="my-panel-shadow"></div>
-        <div className="panel panel-default my-panel">
+      <div style={{display: this.state.show?'block':'none'}}>
+        <div className="my-dialog-shadow"></div>
+        <div className="panel panel-default my-dialog">
           <div className="panel-heading">
             <div className="panel-title">
-              标题
-              <Link to="/" className="pull-right glyphicon glyphicon-remove">
-                取消
-              </Link>
+              {this.props.title}
             </div>
           </div>
           <div className="panel-body">
-            <form
-              className="form form-horizontal"
-              action="index.html"
-              method="post"
-            >
-              <div className="form-group">
-                <label className="col-sm-2 control-label">名称</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="name"
-                    placeholder="请输入商品名称"
-                    ref="name"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-2 control-label">价格</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="price"
-                    placeholder="请输入商品价格"
-                    ref="price"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label className="col-sm-2 control-label">库存</label>
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="count"
-                    placeholder="请输入库存数量"
-                    ref="count"
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <div className="col-sm-10 col-sm-offset-2">
-                  <button
-                    type="button"
-                    className="btn btn-primary form-control"
-                    onClick={this.addItem.bind(this)}
-                  >
-                    提交
-                  </button>
-                </div>
-              </div>
-            </form>
+            {this.props.msg}
+          </div>
+          <div className="panel-footer">
+            <div className="btn-group">
+              {this.props.buttons.map((button,index)=>(
+                <button type="button" className="btn btn-default btn-sm" key={index} onClick={this.fnClick.bind(this, index)}>{button.title}</button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Table
+export default Dialog
