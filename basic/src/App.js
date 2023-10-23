@@ -1,5 +1,6 @@
 import List from './module/List'
 import Logic from './module/Logic'
+import If from './module/If'
 const count = 100
 function getNmae() {
   return "传递一个函数调用" 
@@ -20,6 +21,7 @@ function App() {
       <div style={{color: 'red'}}>this is a test</div>
       <List />
       <Logic />
+      <If />
     </div>
   );
 }
