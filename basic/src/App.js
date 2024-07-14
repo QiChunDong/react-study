@@ -1,6 +1,8 @@
 import List from './module/List'
 import Logic from './module/Logic'
 import If from './module/If'
+import Event from './module/Event'
+import UseStateCase from './module/UseStateCase'
 const count = 100
 function getNmae() {
   return "传递一个函数调用" 
@@ -22,6 +24,8 @@ function App() {
       <List />
       <Logic />
       <If />
+      <Event />
+      <UseStateCase />
     </div>
   );
 }
