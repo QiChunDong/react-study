@@ -1,6 +1,5 @@
 import { useState } from "react";
-import UsernameInput from "../components/usernameInput/index.jsx";
-import PasswordInput from "../components/passwordInput/index.jsx"; // Assuming you have a PasswordInput component
+import AppInput from "../components/AppInput/index.jsx";
 import "./login.css";
 
 function Login() {
@@ -28,17 +27,18 @@ function Login() {
       <h1>Login Form</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <UsernameInput
+          <AppInput
             className={userNameClass}
             value={userName}
-            onChange={(e) => setName(e.target.value)}
+            setState={setName}
           />
         </div>
         <div>
-          <PasswordInput
+          <AppInput
+            type="password"
             className={passwdClass}
             value={passwd}
-            onChange={(e) => setPasswd(e.target.value)}
+            setState={setPasswd}
           />
         </div>
         <br />
