@@ -1,5 +1,6 @@
 import { useState } from "react";
-import AppInput from "../components/AppInput/index.jsx";
+import AppInput from "../components/AppInput.jsx";
+import AppButton from "../components/AppButton.jsx";
 import "./login.css";
 
 function Login() {
@@ -42,9 +43,12 @@ function Login() {
           />
         </div>
         <br />
-        <button className="btn" onClick={handleSubmit}>
-          Login
-        </button>
+        <AppButton className="btn" onClick={handleSubmit}>
+          <span style={{ color: "red" }}>Login</span>
+        </AppButton>
+        <AppButton className="btn" onClick={handleSubmit}>
+          <span>Register</span>
+        </AppButton>
       </form>
     </main>
   );
