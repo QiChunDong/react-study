@@ -1,0 +1,26 @@
+.input {
+  margin: 4px;
+  width: 200px;
+  border-radius: 4px;
+}
+.error {
+  border-color: crimson;
+}
+
+main {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 20px;
+  padding-top: 0;
+  width: 300px;
+}
+
+h1,
+form {
+  text-align: center;
+}
+
+.btn {
+  width: 200px;
+  border-radius: 4px;
+}
