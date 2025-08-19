@@ -1,0 +1,21 @@
+.input {
+  margin: 4px;
+  width: 200px;
+}
+
+main {
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 20px;
+  padding-top: 0;
+  width: 300px;
+}
+
+h1,
+form {
+  text-align: center;
+}
+
+.btn {
+  width: 200px;
+}
