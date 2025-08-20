@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Time from "./Time";
 
 function Effect() {
   const [id, setId] = useState(1);
@@ -25,6 +26,7 @@ function Effect() {
       <div>
         <button onClick={() => setId(id + 1)}>更换</button>
       </div>
+      <Time />
     </>
   );
 }
